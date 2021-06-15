@@ -1,5 +1,6 @@
 package ua.kiss.topdevs.models
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 data class ApiUser(
@@ -8,11 +9,8 @@ data class ApiUser(
     val name: String,
     val avatar: String
 ) {
-    fun getUser() =
-        User(
-            id = this.id,
-            createdAt = this.createdAt.time,
-            name = this.name,
-            avatar = this.avatar
-        )
+    fun getFormatDate(): String {
+        val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return simpleDateFormat.format(this.createdAt)
+    }
 }

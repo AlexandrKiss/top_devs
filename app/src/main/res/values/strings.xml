@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TopDevs</string>
+    <string name="user_list_item_date">Дата регистрации: %1$s</string>
 </resources>
