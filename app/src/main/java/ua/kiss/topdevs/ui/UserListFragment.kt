@@ -5,21 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import ua.kiss.topdevs.database.DataBaseBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import ua.kiss.topdevs.databinding.UserListFragmentBinding
 import ua.kiss.topdevs.models.ApiUser
-import ua.kiss.topdevs.network.ApiHelperImpl
-import ua.kiss.topdevs.network.RetrofitBuilder
 import ua.kiss.topdevs.ui.adapters.UserListAdapter
-import ua.kiss.topdevs.utils.ClickCallback
-import ua.kiss.topdevs.utils.Status
-import ua.kiss.topdevs.utils.ViewModelFactory
-import ua.kiss.topdevs.viewmodels.UserViewModel
+import ua.kiss.topdevs.other.ClickCallback
+import ua.kiss.topdevs.other.Status
 
+@AndroidEntryPoint
 class UserListFragment: BaseFragment() {
     private val binding by lazy { UserListFragmentBinding.inflate(layoutInflater) }
     private val adapter = UserListAdapter()
@@ -57,7 +52,7 @@ class UserListFragment: BaseFragment() {
 
     private fun configureRecyclerView() {
         binding.userListFragmentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter.attachCallback(object : ClickCallback{
+        adapter.attachCallback(object : ClickCallback {
             override fun <T> onClick(data: T?) {
                 val apiUser = data as ApiUser
                 viewModel.saveUser(apiUser)

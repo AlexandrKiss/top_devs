@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import ua.kiss.topdevs.R
 import ua.kiss.topdevs.databinding.UserInfoFragmentBinding
 import ua.kiss.topdevs.models.User
-import ua.kiss.topdevs.utils.Status
+import ua.kiss.topdevs.other.Status
 
+@AndroidEntryPoint
 class UserInfoFragment: BaseFragment() {
     private val binding by lazy { UserInfoFragmentBinding.inflate(layoutInflater) }
     private val args: UserInfoFragmentArgs by navArgs()

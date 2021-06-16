@@ -4,14 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ua.kiss.topdevs.database.AppDataBase
+import ua.kiss.topdevs.database.dao.UserDao
 import ua.kiss.topdevs.models.ApiUser
 import ua.kiss.topdevs.models.User
 import ua.kiss.topdevs.network.ApiHelper
-import ua.kiss.topdevs.utils.Resource
+import ua.kiss.topdevs.other.Resource
+import javax.inject.Inject
 
-class UserViewModel(private val apiHelper: ApiHelper, private val dataBase: AppDataBase): ViewModel() {
+@HiltViewModel
+class UserViewModel
+@Inject constructor(private val apiHelper: ApiHelper, private val userDao: UserDao): ViewModel() {
     private val userListLiveData = MutableLiveData<Resource<List<ApiUser>>>()
     fun getUserListLiveData(): LiveData<Resource<List<ApiUser>>> = userListLiveData
 
@@ -38,7 +42,7 @@ class UserViewModel(private val apiHelper: ApiHelper, private val dataBase: AppD
 
     fun saveUser(apiUser: ApiUser) {
         viewModelScope.launch {
-            dataBase.getUserDao().addUser(apiUser.getUser())
+            userDao.addUser(apiUser.getUser())
         }
     }
 
@@ -46,7 +50,7 @@ class UserViewModel(private val apiHelper: ApiHelper, private val dataBase: AppD
         userLiveData.postValue(Resource.loading(null))
         viewModelScope.launch {
             try {
-                userLiveData.postValue(Resource.success(dataBase.getUserDao().getUser(id)))
+                userLiveData.postValue(Resource.success(userDao.getUser(id)))
             } catch (e: Exception) {
                 userLiveData.postValue(e.message?.let { Resource.error(it, null) })
             }

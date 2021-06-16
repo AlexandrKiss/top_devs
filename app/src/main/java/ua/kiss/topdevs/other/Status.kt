@@ -1,4 +1,4 @@
-package ua.kiss.topdevs.utils
+package ua.kiss.topdevs.other
 
 enum class Status {
     SUCCESS,

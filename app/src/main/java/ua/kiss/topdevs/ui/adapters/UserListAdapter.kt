@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import ua.kiss.topdevs.R
 import ua.kiss.topdevs.databinding.UserListItemBinding
 import ua.kiss.topdevs.models.ApiUser
-import ua.kiss.topdevs.utils.ClickCallback
+import ua.kiss.topdevs.other.ClickCallback
 
 class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserListHolder>() {
     private lateinit var userList: List<ApiUser>

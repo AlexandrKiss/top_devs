@@ -1,4 +1,4 @@
-package ua.kiss.topdevs.utils
+package ua.kiss.topdevs.other
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {
