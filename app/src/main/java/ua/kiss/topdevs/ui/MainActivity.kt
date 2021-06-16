@@ -1,4 +1,4 @@
-package ua.kiss.topdevs
+package ua.kiss.topdevs.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import ua.kiss.topdevs.database.DataBaseBuilder
 import ua.kiss.topdevs.databinding.UserListFragmentBinding
+import ua.kiss.topdevs.models.ApiUser
 import ua.kiss.topdevs.network.ApiHelperImpl
 import ua.kiss.topdevs.network.RetrofitBuilder
 import ua.kiss.topdevs.ui.adapters.UserListAdapter
@@ -17,13 +20,8 @@ import ua.kiss.topdevs.utils.Status
 import ua.kiss.topdevs.utils.ViewModelFactory
 import ua.kiss.topdevs.viewmodels.UserViewModel
 
-class UserListFragment: Fragment() {
+class UserListFragment: BaseFragment() {
     private val binding by lazy { UserListFragmentBinding.inflate(layoutInflater) }
-    private val viewModel by lazy {
-        ViewModelProviders.of(this,
-            ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService))
-        ).get(UserViewModel::class.java)
-    }
     private val adapter = UserListAdapter()
 
     override fun onCreateView(
@@ -37,7 +35,7 @@ class UserListFragment: Fragment() {
     }
 
     private fun getUserList() {
-        viewModel.getUserLiveData().observe(requireActivity(), { res ->
+        viewModel.getUserListLiveData().observe(this, { res ->
             when (res.status) {
                 Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
                 Status.SUCCESS -> {
@@ -61,7 +59,11 @@ class UserListFragment: Fragment() {
         binding.userListFragmentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter.attachCallback(object : ClickCallback{
             override fun <T> onClick(data: T?) {
-                Toast.makeText(requireContext(), "message", Toast.LENGTH_LONG).show()
+                val apiUser = data as ApiUser
+                viewModel.saveUser(apiUser)
+                val action = UserListFragmentDirections
+                        .actionUserListFragmentToUserInfoFragment(apiUser.id)
+                findNavController().navigate(action)
             }
         })
     }

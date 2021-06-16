@@ -12,4 +12,10 @@ data class User(
     val createdAt: Long,
     val name: String,
     val avatar: String
-)
+) {
+    fun getFormatDate(): String {
+        val date = Date(createdAt)
+        val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return simpleDateFormat.format(date)
+    }
+}

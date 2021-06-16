@@ -17,13 +17,12 @@
         tools:src="@drawable/test_image" />
 
     <TextView
+        style="@style/text_style_user_item_name"
         android:id="@+id/user_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/user_item_avatar"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Maxwell" />

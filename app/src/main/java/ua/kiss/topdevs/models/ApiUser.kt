@@ -13,4 +13,6 @@ data class ApiUser(
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return simpleDateFormat.format(this.createdAt)
     }
+
+    fun getUser(): User = User(id, createdAt.time, name, avatar)
 }

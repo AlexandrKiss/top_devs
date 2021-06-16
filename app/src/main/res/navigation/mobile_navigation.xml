@@ -9,5 +9,18 @@
         android:id="@+id/userListFragment"
         android:name="ua.kiss.topdevs.ui.UserListFragment"
         android:label="UserListFragment"
-        tools:layout="@layout/user_list_fragment"/>
+        tools:layout="@layout/user_list_fragment">
+        <action
+            android:id="@+id/action_userListFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="ua.kiss.topdevs.ui.UserInfoFragment"
+        android:label="UserInfoFragment"
+        tools:layout="@layout/user_info_fragment" >
+        <argument
+            android:name="user_id"
+            app:argType="long" />
+    </fragment>
 </navigation>
